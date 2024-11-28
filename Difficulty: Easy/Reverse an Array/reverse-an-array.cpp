@@ -8,17 +8,10 @@ class Solution {
   public:
     void reverseArray(vector<int> &arr) {
         // code here
-        
          int n = arr.size();
-        
-        // Perform swapping from both ends
-        int start = 0, end = n - 1;
-        while (start < end) {
-            swap(arr[start], arr[end]);
-            start++;
-            end--;
+        for (int i = 0; i < n / 2; i++) {
+            swap(arr[i], arr[n - i - 1]); // Swap elements from both ends
         }
-        
     }
 };
 
@@ -43,6 +36,7 @@ int main() {
             cout << arr[i] << " ";
         }
         cout << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
