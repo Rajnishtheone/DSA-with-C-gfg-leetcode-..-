@@ -8,8 +8,8 @@ public:
         vector<int> temp(n);
 
         // Directly compute new positions in one loop
-        for (int j = 0; j < n; j++) {
-            temp[(j + k) % n] = nums[j]; // Shift elements k places at once
+        for (int i = 0; i < n; i++) {
+            temp[(i + k) % n] = nums[i]; // Shift elements k places at once
         }
 
         nums = temp; // Copy back the modified array
