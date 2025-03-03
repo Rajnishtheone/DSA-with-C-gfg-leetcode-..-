@@ -1,19 +1,21 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-         unordered_set<char> charSet; // To store unique characters in the current window
-        int left = 0; // Left pointer of the sliding window
-        int maxLength = 0; // To store the maximum length of the substring
 
-        for (int right = 0; right < s.size(); right++) {
-            // If the current character is already in the set, move the left pointer
-            while (charSet.find(s[right]) != charSet.end()) {
-                charSet.erase(s[left]);
-                left++;
+          vector<int> lastIndex(256, -1); // Stores last seen index of each character
+        int maxLength = 0;
+        int left = 0; // Left pointer of the sliding window
+
+        for (int right = 0; right < s.length(); right++) {
+            // If character is repeated, move left pointer just past the last occurrence
+            if (lastIndex[s[right]] >= left) {
+                left = lastIndex[s[right]] + 1;
             }
-            // Add the current character to the set
-            charSet.insert(s[right]);
-            // Update the maximum length
+
+            // Update the last seen index of the character
+            lastIndex[s[right]] = right;
+
+            // Calculate the max length of substring
             maxLength = max(maxLength, right - left + 1);
         }
 
