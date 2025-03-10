@@ -2,23 +2,21 @@ class Solution {
 public:
     int firstUniqChar(string s) {
         
-        unordered_map<char, pair<int, int>> umap;
+        unordered_map<char, int> umap;
 
         for(int i = 0; i < s.size(); ++i){
             if(umap.find(s[i]) != umap.end()){
-                umap[s[i]].second ++;
+                umap.find(s[i])->second ++;
             
             }
-            else{
-            umap[s[i]] =  {i, 1};
-            }
+            umap.insert({s[i], 1});
+            
         }
 
         for(int i = 0; i < s.size(); ++i){
-        if(umap[s[i]].second == 1){
-            return umap[s[i]].first; 
-        }
-        
+            if(umap.find(s[i])->second == 1){
+                return i;
+            }
         }
 
         return -1;
