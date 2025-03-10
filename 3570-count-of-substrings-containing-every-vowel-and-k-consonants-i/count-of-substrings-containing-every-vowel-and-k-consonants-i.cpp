@@ -1,66 +1,30 @@
 class Solution {
-private:
-    bool isVowel(char c) {
-        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
-    }
-
 public:
-    int countOfSubstrings(string word, int k) {
-        int numValidSubstrings = 0;
-        int start = 0;
-        int end = 0;
-        unordered_map<char, int> vowelCount;
-        int consonantCount = 0;
+    int countOfSubstrings(string word, int k) 
+    {
+        unordered_set<char> vowel = {'a', 'e', 'i', 'o', 'u'};
+        int size = word.length();
+        int unique_counter = 0;
 
-        vector<int> nextConsonant(word.size());
-        int nextConsonantIndex = word.size();
-        for (int i = word.size() - 1; i >= 0; i--) {
-            nextConsonant[i] = nextConsonantIndex;
-            if (!isVowel(word[i])) {
-                nextConsonantIndex = i;
+        for (int i = 0; i < size; ++i) 
+        {
+            unordered_set<char> mpp;
+            int count = 0;
+
+            for (int j = i; j < size; ++j) 
+            {
+                if (vowel.find(word[j]) != vowel.end()) {
+                    mpp.insert(word[j]);
+                } else {
+                    count++;
+                }
+
+                if (mpp.size() == 5 && count == k) {
+                    unique_counter++;
+                }
             }
         }
 
-        while (end < word.size()) {
-            char newLetter = word[end];
-
-            if (isVowel(newLetter)) {
-                vowelCount[newLetter]++;
-            } else {
-                consonantCount++;
-            }
-
-            while (consonantCount > k) {
-                char startLetter = word[start];
-                if (isVowel(startLetter)) {
-                    vowelCount[startLetter]--;
-                    if (vowelCount[startLetter] == 0) {
-                        vowelCount.erase(startLetter);
-                    }
-                } else {
-                    consonantCount--;
-                }
-                start++;
-            }
-
-            while (start < word.size() && vowelCount.size() == 5 &&
-                   consonantCount == k) {
-                numValidSubstrings += nextConsonant[end] - end;
-                char startLetter = word[start];
-                if (isVowel(startLetter)) {
-                    vowelCount[startLetter]--;
-                    if (vowelCount[startLetter] == 0) {
-                        vowelCount.erase(startLetter);
-                    }
-                } else {
-                    consonantCount--;
-                }
-
-                start++;
-            }
-            end++;
-        }
-
-        return numValidSubstrings;
+        return unique_counter;
     }
 };
