@@ -27,24 +27,18 @@ class Solution {
     // Function to perform selection sort on the given array.
     void selectionSort(vector<int> &arr) {
         // code here
-        int index=0,temp,result;
-        int i,j;
-        int n=arr.size();
-        for(i=0;i<n-1;i++){
-            index=i;
-        
-        
-        for(j=i+1;j<n;j++){
-            if (arr[j]<arr[index]){
-                index=j;
+       int n=arr.size();
+        for(int i=0;i<n-1;i++){
+            int minindex=i;
+            for(int j=i+1;j<n;j++){
+                if(arr[j]<arr[minindex]){
+                    minindex=j;
+                }
+                
             }
-            
+            swap(arr[i],arr[minindex]);
         }
-        
-        temp=arr[index];
-        arr[index]=arr[i];
-        arr[i]=temp;
-        }
+       
         
     }
 };
