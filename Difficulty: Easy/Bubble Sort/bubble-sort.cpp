@@ -5,6 +5,7 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 // User function Template for C++
 
 class Solution {
@@ -12,19 +13,17 @@ class Solution {
     // Function to sort the array using bubble sort algorithm.
     void bubbleSort(vector<int>& arr) {
         // Your code here
-        int i,temp,j;
         int n=arr.size();
-        for(int j=0;j<n-1;j++){
-        for(i=0;i<n-1;i++){
-            if(arr[i]>arr[i+1]){
-                temp=arr[i];
-                arr[i]=arr[i+1];
-                arr[i+1]=temp;
+        for(int i=n-2;i>=0;i--){
+            for(int j=0;j<=i;j++){
+                if(arr[j]>arr[j+1]){
+                    swap(arr[j],arr[j+1]);
+                }
             }
-        }
         }
     }
 };
+
 
 
 //{ Driver Code Starts.
@@ -53,6 +52,7 @@ int main() {
             cout << e << " ";
         }
         cout << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
