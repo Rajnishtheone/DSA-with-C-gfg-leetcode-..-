@@ -1,6 +1,8 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
+     
+
         if(s.size() != t.size()) return false;
 
         unordered_map<char,char>mst;
@@ -31,4 +33,5 @@ public:
         
         return true;
     }
+
 };
