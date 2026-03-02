@@ -1,31 +1,21 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        int start =0;
-        int n=s.length();
-        int end = n-1;
+        int left=0;
+        int right= s.size()-1;
+        while(left<right){
+            while(left<right && !isalnum(s[left]))left++;
+            while(left<right && !isalnum(s[right]))right--;
 
-        while(start<end){
-            if(!isalnum(s[start]))
-            {start++;
-            continue;
-            }
-            if(!isalnum(s[end])){
-            
-            end--;
-            continue;
-
-            }
-
-            if(tolower(s[start]) != tolower(s[end])){
+            if(tolower(s[left]) != tolower(s[right])){
                 return false;
             }
 
-            start++;
-            end--;
+            left++;right--;
+
+
+
         }
-
         return true;
-
     }
 };
